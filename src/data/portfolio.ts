@@ -51,7 +51,7 @@ export const PERSONAL_INFO = {
 
 export const ABOUT_DATA = {
   heading: 'About Me',
-  bio: "I'm a developer focused on building practical software products and understanding how their components work together. My interests span backend engineering, modern frontend development, system design, and deployment. I enjoy learning through hands-on work and continuously improving the quality and maintainability of my code.",
+  bio: "I'm a final-year student (expected to graduate in 2027) and a developer focused on building practical software products and understanding how their components work together. My interests span backend engineering, modern frontend development, system design, and deployment. I enjoy learning through hands-on work and continuously improving the quality and maintainability of my code.",
   focusAreas: [
     {
       title: 'Full-Stack Development',
