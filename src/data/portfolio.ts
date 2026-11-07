@@ -19,7 +19,7 @@ export interface ProjectItem {
   id: string
   title: string
   subtitle: string
-  category: 'Microservices' | 'Enterprise / GovTech' | 'Frontend & DevOps'
+  category: 'Microservices' | 'Enterprise / GovTech' | 'Modular Monolith / EdTech' | string
   description: string
   highlights: string[]
   tags: string[]
@@ -150,27 +150,35 @@ export const PROJECTS_DATA: ProjectItem[] = [
     ],
   },
   {
-    id: 'portfolio-engineering',
-    title: 'Minimalist Engineering Portfolio & CI/CD',
-    subtitle: 'High-performance Personal Portfolio Website',
-    category: 'Frontend & DevOps',
-    isFeatured: false,
+    id: 'learninghub-lms',
+    title: 'LearningHub — Modular Monolith University LMS',
+    subtitle: 'Comprehensive Learning Management & Academic Training Platform',
+    category: 'Modular Monolith / EdTech',
+    isFeatured: true,
     description:
-      'A sleek, accessible, high-performance portfolio website engineered with React 19, Tailwind CSS v4, and automated GitHub Actions deployment pipelines.',
+      'An enterprise-grade University Learning Management System (LMS) architected with a strict Modular Monolith structure. Manages full academic training lifecycles including course syllabi, attendance thresholds, automated quiz grading, and credit registration.',
     highlights: [
-      'Modern responsive UI with zero bloated templates, smooth Framer Motion spring physics, and keyboard accessibility',
-      'Interactive features including an in-browser Dev Terminal emulator and a custom "Nuôi Tôi / Buy Me A Coffee" Caffeine Protocol',
-      'Automated testing, linting, and continuous delivery to GitHub Pages via GitHub Actions workflow',
+      'Engineered 8 decoupled domain modules (user, academic, assessment, quiz, grading, attendance, registration, notification) maintaining strict bounded contexts',
+      'Automated attendance enforcement with automated exam ban alerts when exceeding absent ratios (>20%)',
+      'Dynamic quiz engine supporting question banks, timed test sessions, and automated instant grading calculation for GPA/CPA transcripts',
+      'Database schema versioning and zero-downtime migrations managed with Flyway across PostgreSQL environments',
+      'Asynchronous notification dispatchers via Brevo SMTP and cloud document/video storage integrated with Cloudinary',
     ],
     tags: [
-      'React 19',
-      'TypeScript',
-      'Tailwind CSS v4',
-      'Framer Motion',
-      'GitHub Actions',
+      'Java 17',
+      'Spring Boot 3',
+      'Modular Monolith',
+      'PostgreSQL',
+      'Flyway',
+      'Spring Security',
+      'JWT',
+      'Docker',
+      'Cloudinary',
+      'React',
     ],
-    githubUrl: 'https://github.com/canhhocit/canhhocit.github.io',
-    liveUrl: 'https://canhhocit.github.io',
+    githubUrl: 'https://github.com/canhhocit/LMS-backend',
+    architecture:
+      'Client (React + Flutter) → Spring Boot Modular Monolith (8 Business Domain Modules) → PostgreSQL 16 + Flyway + Cloudinary + Brevo Mailer',
   },
 ]
 
