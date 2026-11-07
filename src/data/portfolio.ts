@@ -192,7 +192,7 @@ export const SUPPORT_DATA = {
     'Mỗi ngụm cà phê của bạn là 500 dòng code Spring Boot sạch không bug và 1 đêm thức trắng fix lỗi production!',
   accountHolder: 'PHAM HUU CANH',
   bankName: 'MBBank (Ngân hàng Quân Đội)',
-  accountNumber: 'VQRQACZFU6828',
+  accountNumber: '26061122334455',
   defaultSyntax: 'NUOI CANH',
   qrImagePath: '/myqr.jpg',
   initialCaffeineLevel: 68,
