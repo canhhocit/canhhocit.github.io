@@ -1,10 +1,14 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ArrowDown, Mail, Briefcase } from 'lucide-react'
+import { ArrowDown, Mail, FolderGit2, Coffee } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from '../components/BrandIcons'
 import { PERSONAL_INFO } from '../data/portfolio'
 
-export const Hero: React.FC = () => {
+interface HeroProps {
+  onOpenSupport?: () => void
+}
+
+export const Hero: React.FC<HeroProps> = ({ onOpenSupport }) => {
   const handleScrollTo = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
@@ -27,21 +31,38 @@ export const Hero: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Main Hero Column */}
           <div className="lg:col-span-8 flex flex-col items-start">
-            {/* Current Position Badge */}
+            {/* Badges container */}
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-neutral-200/90 bg-white/90 text-neutral-700 text-xs font-medium shadow-2xs mb-6"
+              className="flex flex-wrap items-center gap-2.5 mb-6"
             >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
-              </span>
-              <span className="text-neutral-500 font-normal">Current:</span>
-              <span className="font-semibold text-neutral-800">{PERSONAL_INFO.currentRole}</span>
-              <span className="text-neutral-300">|</span>
-              <span className="text-neutral-600">{PERSONAL_INFO.company}</span>
+              {/* Current Role Badge */}
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-neutral-200/90 bg-white/90 text-neutral-700 text-xs font-medium shadow-2xs">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
+                </span>
+                <span className="text-neutral-500 font-normal">Current:</span>
+                <span className="font-semibold text-neutral-800">{PERSONAL_INFO.currentRole}</span>
+                <span className="text-neutral-300">|</span>
+                <span className="text-neutral-600">{PERSONAL_INFO.company}</span>
+              </div>
+
+              {/* Caffeine Battery Pill */}
+              {onOpenSupport && (
+                <button
+                  type="button"
+                  onClick={onOpenSupport}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-amber-300/80 bg-amber-50 text-amber-900 text-xs font-semibold shadow-2xs hover:bg-amber-100 hover:border-amber-400 transition-all cursor-pointer group"
+                  title="Giao thức tiếp tế năng lượng cho dev"
+                >
+                  <span className="text-xs group-hover:scale-125 transition-transform">☕</span>
+                  <span>Caffeine: 68%</span>
+                  <span className="text-[10px] text-amber-700 font-normal underline">Nạp thêm</span>
+                </button>
+              )}
             </motion.div>
 
             {/* Small Intro */}
@@ -99,22 +120,33 @@ export const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex flex-wrap items-center gap-4 w-full sm:w-auto"
+              className="flex flex-wrap items-center gap-3 w-full sm:w-auto"
             >
               <button
                 type="button"
-                onClick={() => handleScrollTo('experience')}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-neutral-900 text-white hover:bg-neutral-800 text-sm font-medium transition-all duration-200 shadow-xs hover:shadow-sm focus-visible:outline-2 focus-visible:outline-neutral-900 focus-visible:outline-offset-2 cursor-pointer"
+                onClick={() => handleScrollTo('projects')}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-neutral-900 text-white hover:bg-neutral-800 text-sm font-semibold transition-all duration-200 shadow-xs hover:shadow-sm focus-visible:outline-2 focus-visible:outline-neutral-900 focus-visible:outline-offset-2 cursor-pointer"
               >
-                <Briefcase size={16} />
-                <span>Explore My Experience</span>
+                <FolderGit2 size={16} />
+                <span>Featured Projects</span>
                 <ArrowDown size={14} className="text-neutral-400" />
               </button>
+
+              {onOpenSupport && (
+                <button
+                  type="button"
+                  onClick={onOpenSupport}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-amber-100 hover:bg-amber-200/90 text-amber-900 border border-amber-300 text-sm font-semibold transition-all duration-200 shadow-2xs cursor-pointer group"
+                >
+                  <Coffee size={16} className="text-amber-700 transition-transform group-hover:rotate-12" />
+                  <span>Nuôi Tôi ☕</span>
+                </button>
+              )}
 
               <button
                 type="button"
                 onClick={() => handleScrollTo('contact')}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-white border border-neutral-200 text-neutral-800 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50/30 text-sm font-medium transition-all duration-200 shadow-2xs focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:outline-offset-2 cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-white border border-neutral-200 text-neutral-800 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50/30 text-sm font-medium transition-all duration-200 shadow-2xs focus-visible:outline-2 focus-visible:outline-blue-600 focus-visible:outline-offset-2 cursor-pointer"
               >
                 <Mail size={16} />
                 <span>Get In Touch</span>

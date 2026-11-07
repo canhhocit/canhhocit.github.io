@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ArrowUpRight } from 'lucide-react'
+import { Menu, X, ArrowUpRight, Coffee, Terminal } from 'lucide-react'
 import { NAV_ITEMS, PERSONAL_INFO } from '../data/portfolio'
 
 interface HeaderProps {
   activeSection: string
+  onOpenSupport?: () => void
+  onOpenTerminal?: () => void
 }
 
-export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
+export const Header: React.FC<HeaderProps> = ({ activeSection, onOpenSupport, onOpenTerminal }) => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -123,8 +125,32 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
           })}
         </nav>
 
-        {/* Desktop Action / GitHub */}
-        <div className="hidden md:flex items-center gap-3">
+        {/* Desktop Action Buttons */}
+        <div className="hidden md:flex items-center gap-2.5">
+          {onOpenTerminal && (
+            <button
+              type="button"
+              onClick={onOpenTerminal}
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-neutral-700 hover:text-neutral-900 px-2.5 py-1.5 rounded-lg border border-neutral-200 bg-white/80 hover:bg-neutral-100 transition-all shadow-2xs cursor-pointer"
+              title="Mở Terminal tương tác (Ctrl+K)"
+            >
+              <Terminal size={13} className="text-emerald-600" />
+              <span>Console</span>
+            </button>
+          )}
+
+          {onOpenSupport && (
+            <button
+              type="button"
+              onClick={onOpenSupport}
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-900 bg-amber-100 hover:bg-amber-200/90 border border-amber-300/70 px-3 py-1.5 rounded-lg transition-all shadow-2xs cursor-pointer group"
+              title="Tiếp tế năng lượng cho dev"
+            >
+              <Coffee size={14} className="text-amber-700 transition-transform group-hover:rotate-12" />
+              <span>Nuôi Tôi ☕</span>
+            </button>
+          )}
+
           <a
             href={PERSONAL_INFO.github}
             target="_blank"
@@ -177,7 +203,35 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                 )
               })}
             </nav>
-            <div className="pt-4 mt-3 border-t border-neutral-200/80 flex items-center justify-between px-2">
+            <div className="pt-3 mt-3 border-t border-neutral-200/80 grid grid-cols-2 gap-2 px-1">
+              {onOpenSupport && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    onOpenSupport()
+                  }}
+                  className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-amber-100 text-amber-900 font-bold text-xs border border-amber-300"
+                >
+                  <Coffee size={14} className="text-amber-700" />
+                  <span>Nuôi Tôi ☕</span>
+                </button>
+              )}
+              {onOpenTerminal && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    onOpenTerminal()
+                  }}
+                  className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-neutral-900 text-white font-mono text-xs"
+                >
+                  <Terminal size={14} className="text-emerald-400" />
+                  <span>Terminal</span>
+                </button>
+              )}
+            </div>
+            <div className="pt-3 mt-2 border-t border-neutral-200/80 flex items-center justify-between px-2">
               <span className="text-xs text-neutral-500">{PERSONAL_INFO.email}</span>
               <a
                 href={PERSONAL_INFO.github}

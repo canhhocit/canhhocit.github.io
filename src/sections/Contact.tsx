@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, ArrowUpRight, Copy, Check } from 'lucide-react'
+import { Mail, ArrowUpRight, Copy, Check, Coffee } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from '../components/BrandIcons'
 import { SectionHeading } from '../components/SectionHeading'
 import { CONTACT_DATA } from '../data/portfolio'
 
-export const Contact: React.FC = () => {
+interface ContactProps {
+  onOpenSupport?: () => void
+}
+
+export const Contact: React.FC<ContactProps> = ({ onOpenSupport }) => {
   const [copied, setCopied] = useState(false)
 
   const copyEmail = async () => {
@@ -122,6 +126,45 @@ export const Contact: React.FC = () => {
             )
           })}
         </div>
+
+        {/* Nuoi Toi / Caffeine Support Banner */}
+        {onOpenSupport && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.5 }}
+            className="mb-8 p-6 sm:p-7 rounded-2xl bg-amber-50/80 border border-amber-200/90 flex flex-col sm:flex-row items-center justify-between gap-5 shadow-2xs"
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-amber-500/15 text-amber-700 flex items-center justify-center shrink-0">
+                <Coffee size={24} />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h4 className="text-base font-bold text-neutral-900">
+                    Dự án &quot;Nuôi Tôi&quot; (Buy Me A Coffee) ☕
+                  </h4>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-200/70 text-amber-900">
+                    VietQR / MBBank
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm text-neutral-600 mt-0.5">
+                  Ủng hộ một ly cà phê cóc hoặc trà sữa để dev tiếp thêm năng lượng fix bug và duy trì mã nguồn mở!
+                </p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={onOpenSupport}
+              className="shrink-0 w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-xs transition-colors shadow-xs cursor-pointer"
+            >
+              <Coffee size={14} className="text-amber-400" />
+              <span>Tiếp tế Caffeine</span>
+            </button>
+          </motion.div>
+        )}
 
         {/* Minimal Direct Email Banner */}
         <motion.div

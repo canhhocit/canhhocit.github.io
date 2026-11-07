@@ -15,6 +15,20 @@ export interface ExperienceItem {
   description: string
 }
 
+export interface ProjectItem {
+  id: string
+  title: string
+  subtitle: string
+  category: 'Microservices' | 'Enterprise / GovTech' | 'Frontend & DevOps'
+  description: string
+  highlights: string[]
+  tags: string[]
+  githubUrl?: string
+  liveUrl?: string
+  architecture?: string
+  isFeatured?: boolean
+}
+
 export interface SkillCategory {
   name: string
   skills: string[]
@@ -29,6 +43,7 @@ export interface SdlcStep {
 export const NAV_ITEMS: NavItem[] = [
   { id: 'about', label: 'About' },
   { id: 'experience', label: 'Experience' },
+  { id: 'projects', label: 'Projects' },
   { id: 'skills', label: 'Skills' },
   { id: 'career-focus', label: 'Focus' },
   { id: 'contact', label: 'Contact' },
@@ -73,9 +88,157 @@ export const EXPERIENCE_DATA: ExperienceItem[] = [
     role: 'Software Engineering Intern',
     company: 'DNT Group | AMZ Company',
     period: '07/2026 – Present',
-    description: 'Developing my software engineering skills through practical work and continuous learning in a professional environment.',
+    description: 'Contributing to GovTech enterprise solutions including the Municipal Wi-Fi Captive Portal for Hai Phong City. Building modular Spring Boot 3 backends, citizen session lifecycle management, gateway AP monitoring, and accessible mobile-first frontend interfaces.',
   },
 ]
+
+export const PROJECTS_DATA: ProjectItem[] = [
+  {
+    id: 'campushub-microservice',
+    title: 'CampusHub — Smart Locker & P2P Marketplace',
+    subtitle: 'Enterprise-grade Microservices Platform with Clean Architecture',
+    category: 'Microservices',
+    isFeatured: true,
+    description:
+      'A distributed campus marketplace system integrated with smart locker IoT handovers, featuring asynchronous event-driven communications, multi-schema database segregation, and automated payment gateways.',
+    highlights: [
+      'Architected 7 autonomous microservices following strict 4-layer Clean Architecture (Domain, Application, Infrastructure, Presentation)',
+      'Spring Cloud Gateway with reactive JWT authentication, Netflix Eureka Discovery, and OpenFeign inter-service communication',
+      'Asynchronous Event-Driven broker using RabbitMQ for order fulfillment, locker unlocking triggers, and automated notification workers',
+      'Redis in-memory caching for distributed rate limiting, JWT token blacklisting, and payment idempotency protection',
+      'AES-GCM encryption for locker PINs, PayOS VietQR payment webhook verification, and OpenStreetMap interactive station locator',
+    ],
+    tags: [
+      'Java 17',
+      'Spring Boot 3',
+      'Spring Cloud',
+      'RabbitMQ',
+      'PostgreSQL',
+      'Redis',
+      'Docker',
+      'Clean Architecture',
+      'PayOS VietQR',
+      'React 19',
+    ],
+    githubUrl: 'https://github.com/canhhocit/CampusHub-Microservice',
+    architecture:
+      'Client (React 19) → API Gateway (8080) → Eureka Registry (8761) → [Identity, Product, Locker, Order, Payment, Media, Notification] → PostgreSQL (5 schemas) + RabbitMQ + Redis',
+  },
+  {
+    id: 'wifi-captive-portal',
+    title: 'GovTech Municipal Wi-Fi Captive Portal',
+    subtitle: 'Citizen Network Access & AP Gateway Management System',
+    category: 'Enterprise / GovTech',
+    isFeatured: true,
+    description:
+      'A municipal network access and device management solution built for cultural centers and public facilities in Hai Phong City, focusing on security, resilient network handovers, and compliance.',
+    highlights: [
+      'Engineered modular backend services using Spring Boot 3 and Spring Security 6 for session token lifecycles and MAC/IP validation',
+      'Mobile-first responsive captive login interface compliant with WCAG 2.2 AA accessibility standards (375px–430px viewport targeting)',
+      'Real-time Gateway AP device health tracking, heartbeat monitoring, and automated offline network fallback handlers',
+      'Centralized admin dashboard for municipal administrators to monitor active sessions, device usage, and audit access logs',
+    ],
+    tags: [
+      'Spring Boot 3',
+      'Spring Security 6',
+      'GovTech',
+      'Modular Monolith',
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'WCAG 2.2 AA',
+    ],
+  },
+  {
+    id: 'portfolio-engineering',
+    title: 'Minimalist Engineering Portfolio & CI/CD',
+    subtitle: 'High-performance Personal Portfolio Website',
+    category: 'Frontend & DevOps',
+    isFeatured: false,
+    description:
+      'A sleek, accessible, high-performance portfolio website engineered with React 19, Tailwind CSS v4, and automated GitHub Actions deployment pipelines.',
+    highlights: [
+      'Modern responsive UI with zero bloated templates, smooth Framer Motion spring physics, and keyboard accessibility',
+      'Interactive features including an in-browser Dev Terminal emulator and a custom "Nuôi Tôi / Buy Me A Coffee" Caffeine Protocol',
+      'Automated testing, linting, and continuous delivery to GitHub Pages via GitHub Actions workflow',
+    ],
+    tags: [
+      'React 19',
+      'TypeScript',
+      'Tailwind CSS v4',
+      'Framer Motion',
+      'GitHub Actions',
+    ],
+    githubUrl: 'https://github.com/canhhocit/canhhocit.github.io',
+    liveUrl: 'https://canhhocit.github.io',
+  },
+]
+
+export interface SupportTier {
+  id: string
+  name: string
+  icon: string
+  price: string
+  amount: number
+  description: string
+  caffeineGain: number
+  badge?: string
+}
+
+export const SUPPORT_DATA = {
+  title: 'Dự Án "Nuôi Tôi"',
+  englishTitle: 'Caffeine Dependency Injection Protocol',
+  subtitle:
+    'Mỗi ngụm cà phê của bạn là 500 dòng code Spring Boot sạch không bug và 1 đêm thức trắng fix lỗi production!',
+  accountHolder: 'PHAM HUU CANH',
+  bankName: 'MBBank (Ngân hàng Quân Đội)',
+  accountNumber: 'VQRQACZFU6828',
+  defaultSyntax: 'NUOI CANH',
+  qrImagePath: '/myqr.jpg',
+  initialCaffeineLevel: 68,
+  tiers: [
+    {
+      id: 'coffee',
+      name: 'Cà Phê Cóc',
+      icon: '☕',
+      price: '15.000 đ',
+      amount: 15000,
+      description: 'Đủ pin gõ 500 dòng code Spring Boot sạch không bug.',
+      caffeineGain: 10,
+      badge: 'Phổ biến nhất',
+    },
+    {
+      id: 'milktea',
+      name: 'Trà Sữa Full Topping',
+      icon: '🧋',
+      price: '35.000 đ',
+      amount: 35000,
+      description: 'Tăng 200% sự tập trung khi debug Microservices.',
+      caffeineGain: 25,
+      badge: 'Team Hảo Ngọt',
+    },
+    {
+      id: 'pho',
+      name: 'Bát Phở Tái Nạm',
+      icon: '🍜',
+      price: '50.000 đ',
+      amount: 50000,
+      description: 'Cứu sống dev qua đêm thức trắng fix bug lúc 2h sáng.',
+      caffeineGain: 40,
+      badge: 'Cứu đói cấp tốc',
+    },
+    {
+      id: 'angel',
+      name: 'Nhà Đầu Tư Thiên Thần',
+      icon: '🚀',
+      price: 'Tùy tâm',
+      amount: 100000,
+      description: 'Bảo trợ thiên thần cho đồ án tốt nghiệp Kỹ sư 2027.',
+      caffeineGain: 100,
+      badge: 'VIP Sponsor',
+    },
+  ] as SupportTier[],
+}
 
 export interface LanguageItem {
   name: string
